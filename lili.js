@@ -72,7 +72,12 @@ function search_movie(movie_name) {
             console.log("* Title of the movie: " + movie_result.Title);
             console.log("* Year the movie came out: " + movie_result.Year);
             console.log("* IMDB Rating of the movie: " + movie_result.imdbRating);
-            console.log("* Rotten Tomatoes Rating of the movie: " + movie_result.Ratings[1].Value);
+            // Here would check if the Tomato Rating Exist
+            if (movie_result.Ratings.length > 1) {
+                console.log("* Rotten Tomatoes Rating of the movie: " + movie_result.Ratings[1].Value);
+            } else {
+                console.log("* Rotten Tomatoes Rating of the movie: NOT RATING");
+            }
             console.log("* Country where the movie was produced: " + movie_result.Country);
             console.log("* Language of the movie: " + movie_result.Language);
             console.log("* Plot of the movie: " + movie_result.Plot);
@@ -83,4 +88,4 @@ function search_movie(movie_name) {
         }
     })
 }
-search_movie("Star Wars");
+search_movie("Zorro");
