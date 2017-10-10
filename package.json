@@ -1,0 +1,24 @@
+{
+    "name": "lili",
+    "version": "1.0.0",
+    "description": "Lili is an action reader for twitter, spotyly, movies",
+    "main": "lili.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Rubenjose2/LILI.git"
+    },
+    "author": "Ruben Castro",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Rubenjose2/LILI/issues"
+    },
+    "homepage": "https://github.com/Rubenjose2/LILI#readme",
+    "dependencies": {
+        "node-spotify-api": "^1.0.7",
+        "request": "^2.83.0",
+        "twitter": "^1.7.1"
+    }
+}
