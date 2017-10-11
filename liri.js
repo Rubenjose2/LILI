@@ -1,18 +1,61 @@
 //====================================================//
-//                   WELCOME TO LILI                 //
+//                   WELCOME TO LIRI                 //
 //===================================================//
 
 // requiriment //
-var Twitter = require('twitter');
-var Spotify = require('node-spotify-api');
-var request = require('request');
+var Twitter = require('twitter'); // will use the package from Twitter
+var Spotify = require('node-spotify-api'); // will use the package from Spotify
+var request = require('request'); // Will use the npm request API
+var fs = require('fs'); // Library use to manipulate Files, read and write 
 //**************************************** 
-//This 'client' variable contain the token to be able to use twitter 
+var action = process.argv[2]; // Read the action from the user
+var collector = process.argv; // Read the argument from the user
+var collector_array = "";
+for (var v = 3; v < collector.length; v++) {
+    collector_array += collector[v] + " ";
+}
+
+// ====================Action selector=========================// 
+switch (action) {
+    //User choice Tweeter
+    case 'my-tweets':
+        get_twitter();
+        break;
+    case 'spotify-this-song':
+        //user choice search a song
+        if (collector_array != "") {
+            search_spotify(collector_array);
+        } else {
+            search_spotify("The Sign Ace of Base");
+        }
+        break;
+    case 'movie-this':
+        //user choice search a movie
+        if (collector_array != "") {
+            search_movie(collector_array);
+        } else {
+            search_movie('Mr. Nobody');
+            console.log("If you haven't watched 'Mr. Nobody,' then you should: <http://www.imdb.com/title/tt0485947/>");
+            console.log("It's on Netflix!");
+        }
+        break;
+    case 'do-what-it-says':
+        // Is selecting the function and will read from the file random.txt
+        do_what_it_says();
+        break;
+    default:
+        console.log("WRONG CHOISE . I'm here to help you");
+        break;
+}
+
+//=============================================================//
+
 
 //==========================HERE IS THE TWITTER SECTION===============================
-var TwittKey = require("./keys.js");
+
 
 function get_twitter() {
+    var TwittKey = require("./keys.js");
     var client = new Twitter(TwittKey); // Will load the function of twitter using the npm
 
     client.get('favorites/list', function(error, tweets, response) {
@@ -33,10 +76,12 @@ function get_twitter() {
 // =================================================================================
 //                                Spotify Performance
 // =================================================================================
-var spotify_key = require("./spotify_key");
-var spotify_key_client = new Spotify(spotify_key);
 
 function search_spotify(song) {
+    //Requeriments and declaration 
+    var spotify_key = require("./spotify_key");
+    var spotify_key_client = new Spotify(spotify_key);
+    //spotify call
     spotify_key_client.search({
         type: "track",
         query: song,
@@ -58,8 +103,6 @@ function search_spotify(song) {
         }
     })
 }
-// search_spotify("Levanto mis manos");
-
 // =================================================================================
 //                                 OMDB API 
 // =================================================================================
@@ -88,4 +131,17 @@ function search_movie(movie_name) {
         }
     })
 }
-search_movie("Zorro");
+
+// =======FUNCTION THAT WOULD CALL DO WHAT IT SAYS=======//
+function do_what_it_says() {
+    // Will read the file Random.txt
+    fs.readFile("random.txt", "utf8", function(error, data) {
+        if (error) {
+            console.log(error);
+        } else {
+            // Read the file and only use the second argument 
+            dataarr = data.split(",");
+            search_spotify(dataarr[1]);
+        }
+    })
+}
