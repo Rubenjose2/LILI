@@ -96,7 +96,7 @@ function search_spotify(song) {
                 console.log("==================================================")
                 console.log("Artist Name: " + results[j].album.artists[0].name);
                 console.log("Song Name: " + results[j].name);
-                console.log("Preview the Song: " + results[j].album.external_urls.spotify);
+                console.log("Preview the Song: " + results[j].external_urls.spotify);
                 console.log("Album Name: " + results[j].album.name);
                 console.log("==================================================")
             }
