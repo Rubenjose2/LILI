@@ -22,5 +22,4 @@ To use the solution, the user has different options:
 2.-node liri.js movie-this (add the movie title). User would get the movie result
 3.-node liri.js spotify-this-song (add the song). The user would get the song detail you are looking.
 4.- node liri.js do-what-it-says. Liri would get a song from a random text.
-
 Also, the system would save all the results into a log.txt
